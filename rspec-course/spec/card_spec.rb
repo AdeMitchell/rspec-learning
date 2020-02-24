@@ -5,7 +5,10 @@ class Card
   #   @type = type
   # end
 
-  attr_reader :rank, :suit
+  # attr_reader only allows items to be read
+  # attr_reader :rank, :suit
+  # attr_accessor allows items to be written to
+  attr_accessor :rank, :suit
 
   def initialize(rank, suit)
     @suit = suit
@@ -36,21 +39,64 @@ end
 
 RSpec.describe Card do
 
-  ## fourth written code ##
-  # `def card` has taken over from `before` in the previous example
-  # because we are using a methog now we have to change `@card` to `card`
-  def card
-    Card.new('Ace', 'Spades')
-  end
+  ## sixth written code ##
+  # Custom ERROR messages
+  let(:card) { Card.new('Ace', 'Spades') }
 
   it 'has a suit' do
     expect(card.suit).to eq('Spades')
   end
 
   it 'has a rank' do
-    expect(card.rank).to eq('Ace')
+    card.rank = 'Queen'
+    expect(card.rank).to eq('Queen')
   end
-  ## end fourth written code ##
+
+  it 'has a custom error message' do
+    comparison = 'Spades'
+    expect(card.suit).to eq(comparison), "Hey, I expected #{comparison} but got #{card.suit} instead!"
+  end
+  ## end sixth written code ##
+
+  ## fifth written code ##
+  # `def card` has taken over from `before` in the previous example
+  # because we are using a methog now we have to change `@card` to `card`
+  # def card
+  #   Card.new('Ace', 'Spades')
+  # end
+
+  # Let assigns card as a local variable for the tests, so the elements can be reassigned
+  # Let is better than assigning a def method
+  # Let does not run until it's required
+  # Let! == the item MUST be run before the tests
+  # let(:card) { Card.new('Ace', 'Spades') }
+  #
+  # it 'has a suit' do
+  #   expect(card.suit).to eq('Spades')
+  # end
+  #
+  # it 'has a rank' do
+  #   card.rank = 'Queen'
+  #   expect(card.rank).to eq('Queen')
+  # end
+  ## end fifth written code ##
+
+
+  # ## fourth written code ##
+  # # `def card` has taken over from `before` in the previous example
+  # # because we are using a methog now we have to change `@card` to `card`
+  # def card
+  #   Card.new('Ace', 'Spades')
+  # end
+  #
+  # it 'has a suit' do
+  #   expect(card.suit).to eq('Spades')
+  # end
+  #
+  # it 'has a rank' do
+  #   expect(card.rank).to eq('Ace')
+  # end
+  # ## end fourth written code ##
 
 
   ## third written code ##
